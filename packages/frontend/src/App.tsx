@@ -2,9 +2,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes.tsx";
+import { useState } from "react";
+import { AppContext, AppContextType } from "./lib/contextLib.ts";
 import "./App.css";
 
 function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
   return (
     <div className="App container py-3">
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3 px-3">
@@ -23,7 +26,12 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes />
+      <AppContext.Provider
+        value={{ isAuthenticated, userHasAuthenticated } as AppContextType}
+      >
+        <Routes />
+      </AppContext.Provider>
+
     </div>
   );
 }
