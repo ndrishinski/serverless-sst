@@ -1,12 +1,13 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-import Routes from "./Routes.tsx";
 import { useState, useEffect } from "react";
-import { AppContext, AppContextType } from "./lib/contextLib.ts";
-import { Auth } from "aws-amplify";
-import "./App.css";
 import { useNavigate } from "react-router-dom";
+import { Auth } from "aws-amplify";
+import Routes from "./Routes.tsx";
+import { AppContext, AppContextType } from "./lib/contextLib.ts";
+import { onError } from "./lib/errorLib.ts";
+import "./App.css";
 
 function App() {
   const nav = useNavigate();
@@ -21,9 +22,9 @@ function App() {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
-    } catch (e) {
-      if (e !== "No current user") {
-        alert(e);
+    } catch (error) {
+      if (error !== "No current user") {
+        onError(error);
       }
     }
   
