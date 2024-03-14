@@ -1,4 +1,5 @@
 const config = {
+  STRIPE_KEY: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   // Frontend config
   MAX_ATTACHMENT_SIZE: 5000000,
   // Backend config
@@ -16,6 +17,7 @@ const config = {
     APP_CLIENT_ID: import.meta.env.VITE_USER_POOL_CLIENT_ID,
     IDENTITY_POOL_ID: import.meta.env.VITE_IDENTITY_POOL_ID,
   },
+  
 };
 
 export default config;
